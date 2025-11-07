@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import Product from '../../models//product/index.js';
+import Product from '../../models/product/index.js';
 
 
 const getProducts = async (req, res) => {

@@ -1,5 +1,5 @@
 import express from 'express';
-import Product from '../../models//product/index.js';
+import Product from '../../models/product/index.js';
 
 const postProducts = async (req, res) => {
     try {
