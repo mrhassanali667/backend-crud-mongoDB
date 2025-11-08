@@ -1,9 +1,11 @@
 import express from 'express';
 import Product from '../../models/product/index.js';
+import productSchema from '../../schema/productSchema.js'
 
 const postProducts = async (req, res) => {
     try {
-        const product = await Product.create(req.body)
+        productSchema.validateSync(req.body, { strict: true })
+        const product = await Product.create({ ...req.body })
         res.status(201).send({
             message: "product successfully added",
             product: product,

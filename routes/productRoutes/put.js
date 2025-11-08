@@ -1,5 +1,6 @@
 import express from 'express';
 import Product from '../../models/product/index.js';
+import productSchema from '../../schema/productSchema.js';
 
 const putProducts = async (req, res) => {
     try {
@@ -11,7 +12,6 @@ const putProducts = async (req, res) => {
             status: 201
         });
     } catch (err) {
-        console.log(err)
         res.status(500).send({
             message: err.message,
             product: null,

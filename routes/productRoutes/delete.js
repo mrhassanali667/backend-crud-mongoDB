@@ -5,13 +5,12 @@ const deleteProducts = async (req, res) => {
     try {
         const { id } = req.params
         const product = await Product.findByIdAndDelete(id)
-        res.status(204).send({
+        res.status(200).send({
             message: "product successfully deleted",
             product: product,
-            status: 204
+            status: 200
         });
     } catch (err) {
-        console.log(err)
         res.status(500).send({
             message: err.message,
             product: null,

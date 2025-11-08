@@ -33,7 +33,7 @@ export const getOneUser = async (req, res) => {
         })
     } catch (err) {
         res.status(500).send({
-            message: err.message == "Cast to ObjectId failed for value \"690d21e3fc64e488d55ac9\" (type string) at path \"_id\" for model \"products\"" && "product not found",
+            message:"product not found",
             products: null,
             status: 500,
         })
