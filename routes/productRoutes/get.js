@@ -6,7 +6,6 @@ import Product from '../../models/product/index.js';
 const getProducts = async (req, res) => {
     try {
         const products = await Product.find();
-        console.log(products)
         res.status(200).send({
             message: "users successfully fetched",
             products: products,
@@ -21,6 +20,25 @@ const getProducts = async (req, res) => {
             status: 500,
         })
     }
+}
+
+export const getOneUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const product = await Product.findById(id);
+        res.status(200).send({
+            message: "user successfully fetched",
+            products: product,
+            status: 200,
+        })
+    } catch (err) {
+        res.status(500).send({
+            message: err.message == "Cast to ObjectId failed for value \"690d21e3fc64e488d55ac9\" (type string) at path \"_id\" for model \"products\"" && "product not found",
+            products: null,
+            status: 500,
+        })
+    }
+
 }
 
 
