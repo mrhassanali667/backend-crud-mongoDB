@@ -8,10 +8,13 @@ import cors from 'cors'
 const app = express();
 const port = 3000;
 
+
+
 app.use(cors())
 app.use(morgan("short"))
 app.use(express.json())
 app.use('/', router)
+
 
 mongoose.connection.on("open", () => {
     console.log("Database is Connected")

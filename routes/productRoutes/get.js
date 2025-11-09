@@ -33,7 +33,7 @@ export const getOneUser = async (req, res) => {
         })
     } catch (err) {
         res.status(500).send({
-            message:"product not found",
+            message: "product not found",
             products: null,
             status: 500,
         })
