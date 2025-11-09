@@ -27,7 +27,7 @@ export const getOneUser = async (req, res) => {
         const { id } = req.params
         const product = await Product.findById(id);
         res.status(200).send({
-            message: "user successfully fetched",
+            message: "product successfully fetched",
             products: product,
             status: 200,
         })
