@@ -1,5 +1,4 @@
 import express from 'express';
-import mongoose, { setDriver } from 'mongoose';
 import Product from '../../models/product/index.js';
 import productSchema from '../../schema/productSchema.js';
 
