@@ -5,10 +5,11 @@ import productSchema from '../../schema/productSchema.js';
 
 
 const getProducts = async (req, res) => {
+    const { limit, skip } = req.query
     try {
-        const products = await Product.find();
+        const products = await Product.find().limit(limit).skip(skip);
         res.status(200).send({
-            message: "users successfully fetched",
+            message: products.length < 1 ? "No products available yet." : "users successfully fetched",
             products: products,
             total: products.length,
             status: 200,
@@ -29,10 +30,10 @@ export const getOneProduct = async (req, res) => {
         const product = await Product.findById(id);
 
     } catch (err) {
-        res.status(500).send({
+        res.status(404).send({
             message: "product not found",
             products: null,
-            status: 500,
+            status: 404,
         })
     }
 
@@ -63,12 +64,6 @@ export const getFilteredProducts = async (req, res) => {
         }
     }
 
-    if (limit) {
-        queryObj = {
-            ...queryObj,
-            limit: { $gte: limit }
-        }
-    }
     try {
 
         const products = await Product.find({
@@ -91,7 +86,7 @@ export const getFilteredProducts = async (req, res) => {
 }
 
 export const searchProducts = async (req, res) => {
-    let { name } = req.query
+    const { name } = req.query
     try {
         const products = await Product.find({
             name: { $regex: name, $options: 'i' }
@@ -99,20 +94,26 @@ export const searchProducts = async (req, res) => {
         )
 
         if (products.length < 1) {
-            return res.json({
+            return res.status(404).json({
                 message: "products not found",
-                data: []
+                data: [],
+                total: 0,
+                status: 404
             })
         }
-        res.json({
+        res.status(200).json({
             message: "products successfully fetched",
-            data: products
+            data: products,
+            total: products.length,
+            status: 200
         })
 
     } catch (err) {
-        res.json({
+        res.status(500).json({
             message: err.message,
-            data: null
+            data: null,
+            total: 0,
+            status: 500
         })
     }
 }

@@ -9,12 +9,14 @@ const putProducts = async (req, res) => {
         res.status(201).send({
             message: "product successfully updated",
             product: product,
+            total: 1,
             status: 201
         });
     } catch (err) {
         res.status(500).send({
             message: err.message,
             product: null,
+            total: 0,
             status: 500
         });
 

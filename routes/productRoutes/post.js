@@ -4,11 +4,12 @@ import productSchema from '../../schema/productSchema.js'
 
 const postProducts = async (req, res) => {
     try {
-        productSchema.validateSync(req.body, { strict: true })
+        // productSchema.validateSync(req.body, { strict: true })
         const product = await Product.create({ ...req.body })
         res.status(201).send({
             message: "product successfully added",
             product: product,
+            total: 1,
             status: 201
         });
     } catch (err) {
@@ -16,6 +17,7 @@ const postProducts = async (req, res) => {
         res.status(500).send({
             message: err.message,
             product: null,
+            total: 0,
             status: 500
         });
 
