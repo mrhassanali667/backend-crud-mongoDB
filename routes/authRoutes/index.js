@@ -1,5 +1,5 @@
 import express from 'express'
-import registerUser, { loginUser } from './post'
+import registerUser, { loginUser } from './post.js'
 
 const authRouter = express.Router()
 
